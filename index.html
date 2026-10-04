@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahaveer's Home</title>
+  <meta name="description" content="Mahaveer Sahu - contact, Wi-Fi, social links and visitor access.">
+  <style>
+    :root {
+      --bg:#0b1020; --card:#151c32; --text:#f7f8fc; --muted:#aab3ca;
+      --accent:#6ea8fe; --border:#283250; --danger:#ffcf70;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:linear-gradient(180deg,#090d19,#10172a); color:var(--text);
+      min-height:100vh;
+    }
+    .wrap { max-width:620px; margin:auto; padding:28px 18px 45px; }
+    .hero { text-align:center; padding:22px 0 18px; }
+    .avatar {
+      width:82px;height:82px;border-radius:50%;margin:0 auto 14px;
+      display:grid;place-items:center;font-size:29px;font-weight:800;
+      background:linear-gradient(135deg,#6ea8fe,#8b7cff);
+      color:white; box-shadow:0 12px 35px #0005;
+    }
+    h1 { margin:0 0 7px; font-size:30px; }
+    .tag { color:var(--muted); margin:0; }
+    .card {
+      background:rgba(21,28,50,.92); border:1px solid var(--border);
+      border-radius:18px; padding:18px; margin:14px 0;
+      box-shadow:0 12px 35px #0003;
+    }
+    h2 { font-size:17px; margin:0 0 14px; }
+    .row {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:11px 0; border-bottom:1px solid #ffffff0d;
+    }
+    .row:last-child { border-bottom:0; }
+    .label { color:var(--muted); font-size:13px; }
+    .value { font-size:15px; word-break:break-word; text-align:right; }
+    .buttons { display:grid; gap:10px; }
+    a.btn, button {
+      border:0; border-radius:12px; padding:13px 14px; font-weight:700;
+      font-size:14px; cursor:pointer; text-decoration:none; text-align:center;
+    }
+    .primary { background:var(--accent); color:#071022; }
+    .secondary { background:#222b47; color:var(--text); border:1px solid var(--border); }
+    .warning { background:#3a3020; color:var(--danger); }
+    .hidden { display:none; }
+    input, textarea {
+      width:100%; margin-top:7px; padding:12px; border-radius:11px;
+      border:1px solid var(--border); background:#0e1528; color:var(--text);
+      outline:none;
+    }
+    textarea { min-height:90px; resize:vertical; }
+    label { display:block; margin:10px 0; color:var(--muted); font-size:13px; }
+    .small { font-size:12px; color:var(--muted); line-height:1.5; }
+    #status { margin-top:12px; line-height:1.5; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="avatar">MS</div>
+    <h1>Mahaveer Sahu</h1>
+    <p class="tag">Welcome to my place 👋</p>
+  </section>
+
+  <section class="card">
+    <h2>📇 Contact</h2>
+    <div class="buttons">
+      <a class="btn primary" href="tel:+919799881908">📞 Call Mahaveer</a>
+      <a class="btn secondary" href="https://wa.me/919799881908" target="_blank">💬 WhatsApp Chat</a>
+      <a class="btn secondary" href="mailto:sahumahaveer@yahoo.com">✉️ Email</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🌐 Social</h2>
+    <div class="buttons">
+      <a class="btn secondary" href="https://www.linkedin.com/in/mahaveersahuu/" target="_blank">💼 LinkedIn</a>
+      <a class="btn secondary" href="https://www.instagram.com/_the_rhymester_/" target="_blank">📸 Instagram</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>📍 Address</h2>
+    <p class="value" style="text-align:left;line-height:1.6">
+      Room No. 102, 1st Floor, SRI RK NILAYA Building,<br>
+      3rd Cross, Main, Bhoganahalli Main Rd,<br>
+      JCR Layout, Panathur,<br>
+      Bengaluru, Karnataka 560087
+    </p>
+    <a class="btn primary" style="display:block" target="_blank"
+       href="https://www.google.com/maps/search/?api=1&query=Room+102+SRI+RK+NILAYA+Bhoganahalli+Panathur+Bengaluru+560087">
+       🗺️ Open in Google Maps
+    </a>
+  </section>
+
+  <section class="card">
+    <h2>📶 Wi-Fi</h2>
+    <div class="row"><span class="label">Network</span><span class="value">MS049</span></div>
+    <div class="row">
+      <span class="label">Password</span>
+      <span class="value" id="wifiPass">••••••••••</span>
+    </div>
+    <button class="secondary" style="width:100%;margin-top:12px" onclick="toggleWifi()">👁️ Show Wi-Fi Password</button>
+    <p class="small">Only share this QR with people you trust. Anyone with the QR may be able to access this page.</p>
+  </section>
+
+  <section class="card">
+    <h2>🔐 Request a Visit / Key Access</h2>
+    <p class="small">Submit your expected visit date and time. Mahaveer can approve the request before security hands over keys.</p>
+
+    <form id="visitForm">
+      <label>Name
+        <input name="name" required placeholder="Your full name">
+      </label>
+      <label>Mobile number
+        <input name="phone" required placeholder="+91...">
+      </label>
+      <label>Visit date
+        <input name="date" type="date" required>
+      </label>
+      <label>Expected arrival time
+        <input name="time" type="time" required>
+      </label>
+      <label>Message / purpose
+        <textarea name="message" placeholder="Optional"></textarea>
+      </label>
+      <button class="primary" style="width:100%" type="submit">Send Visit Request</button>
+    </form>
+    <div id="status"></div>
+  </section>
+
+  <p class="small" style="text-align:center">Made for Mahaveer's home • Please respect privacy and security.</p>
+</div>
+
+<script>
+  const WIFI_PASSWORD = "123454321#";
+  // After deploying the Google Apps Script backend, paste its /exec URL below.
+  const VISIT_API_URL = "https://script.google.com/macros/s/AKfycby8kQ2w8tzVXKRK4wSc2RX_MxtWh2mS8-1v7Y4YiUSJpf7FUBSdHEmLWOl7uNg15A20/exec";
+
+  function toggleWifi() {
+    const el = document.getElementById("wifiPass");
+    const btn = event.currentTarget;
+    if (el.textContent.includes("•")) {
+      el.textContent = WIFI_PASSWORD;
+      btn.textContent = "🙈 Hide Wi-Fi Password";
+    } else {
+      el.textContent = "••••••••••";
+      btn.textContent = "👁️ Show Wi-Fi Password";
+    }
+  }
+
+  document.getElementById("visitForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const status = document.getElementById("status");
+    const data = Object.fromEntries(new FormData(e.target).entries());
+
+    if (VISIT_API_URL.includes("PASTE_YOUR")) {
+      status.innerHTML = "⚠️ Visitor form is ready, but the Google Apps Script URL has not been connected yet.";
+      return;
+    }
+
+    status.textContent = "Sending request...";
+    try {
+      const response = await fetch(VISIT_API_URL, {
+        method: "POST",
+        headers: {"Content-Type":"text/plain;charset=utf-8"},
+        body: JSON.stringify(data)
+      });
+      const result = await response.json();
+      if (result.ok) {
+        status.innerHTML = "✅ Request submitted. Please wait for Mahaveer's approval.";
+        e.target.reset();
+      } else {
+        status.textContent = "❌ " + (result.message || "Could not submit request.");
+      }
+    } catch (err) {
+      status.textContent = "❌ Could not connect to the visitor system.";
+    }
+  });
+</script>
+</body>
+</html>
